@@ -4,8 +4,6 @@ description: Lorem ipsum dolor sit amet - 2
 layout: ../../layouts/MainLayout.astro
 ---
 
-# Routing Analysis 
-
 ## Intro
 
 Through the inherent nature of onion-enabled payments, a certain degree of source and destination privacy is given as any payment flows through the network. Since Lightning payments typically go through other third parties, it's important that the source, destination, and any other metadata are concealed. Lightning Nodes are paid for the service they provide as they route payments, and knowing more information than necessary may lead to censorship and privacy concerns.
@@ -14,11 +12,11 @@ Through the inherent nature of onion-enabled payments, a certain degree of sourc
 
 There are scenarios in which routing nodes may derive information about the sender or receiver of a Lightning payment. This article will dive into a few scenarios and some improvements to make it difficult to observe payments as they route down any given path. 
 
-## Meat
+## A deep dive into Routing Analysis
 
 ### Routing concerns today
 
-The Onion Routing properties of Lightning payments provide a lot of benefits that are similar to Tor's onion routing. The source and destination of payments are supposed to be concealed as they are routed across the network. However, there are a few scenarios where routers can tell when the payment came from or is going. There are also scenarios where a payment passing through a single actor (across one or more of the actor's nodes) can be correlatable. 
+The Onion Routing properties of Lightning payments provide a lot of benefits that are similar to Tor's onion routing. The source and destination of payments are supposed to be concealed as they are routed across the network. However, there are a few scenarios where routers could infer this information. There are also scenarios where a payment passing through a single actor with multiple nodes can be correlatable. 
 
 Whenever a node is paying a direct channel partner, it's possible that the payment was routed through them so it cannot be certain whom the payment came from. However, if the payer has no public channel open with any other node, then there's virtually no way the payment was routed by anyone else. The same thing applies whenever it's a two-hop payment and the destination also does not have any other public channel opened. This scenario happens frequently when there are LSPs involved. 
 
@@ -26,11 +24,10 @@ Having good routing hygiene is not enough though. There are several properties o
 
 ### PTLCs
 
-PTLCs offer two main improvements to Lightning. One is some escrow / DLC / smart contract possibilities and one helps payment correlatability. 
+PTLCs offer two main improvements to Lightning. One is escrow / DLC / smart contract possibilities and one helps payment correlatability. Other benefits such as fixing the wormhole attack also exist.
 
-When a HTLC payment goes through multiple nodes, it appears as the same payment hash each time. So whenever the same actor sees the same payment hash on multiple nodes, they can tell that it is the same payment. They might not know who exactly it came from or where it is going (except in cases outlined above)
+When a HTLC payment goes through multiple nodes, the same payment hash is used each time. So whenever the same actor sees the same payment hash on multiple nodes, they can tell that it is the same payment. They might not know who exactly it came from or where it is going (except in cases outlined above). If a Lightning Service Provider routes a user's payment to a major merchant, they might be able to conclude the exact source and destination. 
 
-(TODO Visualize further the concern with hashes showing up on multiple parts of the path, and how each section of the path improves with points).
 
 ### Timing Delay
 
@@ -40,7 +37,7 @@ There are two primary concerns to timing analysis when it comes to routing Light
 
 Research has shown that there's an average amount of delay between two nodes (TODO CITATION NEEDED). One could estimate this based on averages or you could actively probe the network to find the delays between two specific nodes. If the average (or specific) time delay was 100ms between Alice and Bob, and Alice routes a payment to Bob, and Bob immediately responds with the preimage to that HTLC, then Alice has a reasonable assumption that Bob was the final destination. Alice can even extend that assumption further if she knows the time delays of the nodes Bob is connected to and so on. It doesn't assert which is the sending destination, but Alice could assume that if she was routing to Bob (and possibly further to some specific nodes past Bob), then she can do routing analysis to figure out the nodes that may have taken her path. It would not be reasonable in most scenarios for Bob's direct channel partners to make a payment through Alice to Bob. It would not be the shortest path or the smallest fee, which is quite often the algorithm used for Lightning node implementations. The exception to this is if an alternative route was taken strictly because of liquidity issues or node failures/downtime, though through the use of probing this kind of information can be figured out.
 
-This can be even further analyzed if Bob had another node named Dave and it turns out that the payment went from Alice -> Bob -> Charlie -> Dave -> Evan. For one, Bob can tell this today because of the payment preimage hash. However, even without that, given the fact that a payment with a specific amount flowed through Alice just before a payment with just under the same amount flowed through Dave's node. One cannot assume on Lightning that because it's a different node, it is always a different owner. There are many nodes owned by the same actor on the Lightning Network. 
+This can be even further analyzed if Bob had another node named Bob-2 and it turns out that the payment went from Alice -> Bob -> Charlie -> Bob-2 -> Evan. For one, Bob can tell this today because of the payment preimage hash. However, even without that, Bob would see that a payment with a specific amount flowed through his first node just before a payment with just under the same amount flowed through his 2nd node. One cannot assume on Lightning that because it's a different node, it is always a different owner. There are many nodes owned by the same actor on the Lightning Network. 
 
 #### Fixing Timing Analysis
 
@@ -50,14 +47,14 @@ Another aspect, as discussed by Peter Todd on the [Lightning-Dev Mailing list](h
 
 However, there are a few problems with sender opt-in timing delays. One is the fact that it may not be enforceable. If the sender asks a node today for a certain delay, but once received by the routing node, it decides to forward instantly anyways, nothing is stopping that from happening. The router can ignore this timing delay ask. One possible solution is to also alert the next node about this delay, and if that node is respecting the timing delay ask, they know the time stamp the previous node was asked to hold it till (without revealing how long in total) and may reject it if it was not respected. However, there are no incentives for upgrading consensus in this way. Having HTLCs in flight for longer is a concern in general given the max per channel is currently 483. There could be some reasonable max's set if we were able to have a consensus change but with all of this adds complexity and possibly more failures to routing. Is it worth the privacy cost? And how much timing delay would be needed assuming a certain amount of payment activity?
 
-Without a consensus-wide change, routing delays might not be respected but some probing could be done to see which nodes honor it and which don't. By probing the paths between each node and measuring the timing, you could figure out which nodes are respecting the delay by having the test node with a more significant delay than the others. This might not be perfect in practice given that it's not always reliable that a certain delay between two nodes is consistent. General network issues could occur, especially on Tor. 
+Without a protocol-wide change, routing delays might not be respected but some probing could be done to see which nodes honor it and which don't. By probing the paths between each node and measuring the timing, you could figure out which nodes are respecting the delay by having the test node with a more significant delay than the others. This might not be perfect in practice given that it's not always reliable that a certain delay between two nodes is consistent. General network issues could occur, especially on Tor. 
 
 
 ### Random Amount MPP
 
 Uncorrelatable payment hashes and some timing delays are not enough to break routing analysis completely. To improve assumptions that could be made about where a payment came from or where it is going, Multi-Path Payments are needed and it should be done with more randomness. Simply splitting up the payments evenly in half may not be good enough.
 
-For the scenarios below, assume that payment hashes are uncorrelatable via PTLCs and that not enough of a timing delay occurred to provide a reasonable amount of amount + timing anonymity set. We dissect how improvements can still be made with these features. In the examples below, this also assumes a 1 sat fee across all nodes but this will vary in reality.
+For the scenarios below, assume that payment hashes are uncorrelatable via PTLCs and that not enough of a timing delay occurred to provide a reasonable amount of amount + timing anonymity set. We dissect how improvements can still be made with these features. In the examples below, this also assumes a 1 sat fee across all nodes but this will vary in reality. Since routing fees are public information anyways, the exact fees in any given route can be calculated easily.
 
 #### Single payment analysis
 
@@ -97,7 +94,7 @@ We can see in the picture a similar payment splitting mechanism to the advanced 
 
 However, the main benefit is that there is more randomness introduced with the amounts and that the observer's node at the end can't correlate specific parts together. In aggregation, it may be possible, but if we were able to get into a situation where many nodes on the network were always splintering, it becomes much harder to do amount correlation, even amongst parts. 
 
-One important note is that this is currently theoretical and not, to our knowledge, something that is currently being proposed as a Lightning Network protocol change. One question is whether or not you could enforce the splintering to occur or if this is something that could be achieved at a trampoline router layer, however voluntarily at the trampoline's discretion. 
+One important note is that this is currently theoretical and not, to our knowledge, something that is currently being proposed as a Lightning Network protocol change. One question is whether or not you could enforce the splintering to occur or if this is something that could be achieved at a trampoline router layer.
 
 Until we get better decorrelation on Lightning (via PTLCs and timing delay), it may not be worth tackling this problem quite yet, however, we could achieve something that may prove to be good enough by manually crafting complex small amount MPPs, which can be done today. One problem with the complexity of MPP or splintered payments is the UX concern. How much time will it take to find many successful routes of low value, especially if avoiding node reuse is a priority?
 
