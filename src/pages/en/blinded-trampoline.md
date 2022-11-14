@@ -105,13 +105,13 @@ Eclair is currently the only implementation with support for trampoline routing.
 
 Blinded Paths:
 
-lightning/bolts#765
+https://github.com/lightning/bolts#765
 
 Trampoline:
 
-lightning/bolts#829
+https://github.com/lightning/bolts#829
 
-lightning/bolts#836
+https://github.com/lightning/bolts#836
 
 ### Misc.
 
