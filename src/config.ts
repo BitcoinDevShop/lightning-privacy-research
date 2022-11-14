@@ -51,7 +51,7 @@ export const SIDEBAR: Sidebar = {
 			{ text: 'Introduction', link: 'en/introduction' },
 			{ text: 'Routing Analysis', link: 'en/routing-analysis' },
 			{ text: 'Channel Coinjoins', link: 'en/channel-coinjoins' },
-			{ text: 'Blinded Trampoline', link: 'en/blinded-trampoline' },
+			{ text: 'Blinded Paths + Trampoline Routing', link: 'en/blinded-trampoline' },
 		],
 		// 'Another Section': [{ text: 'Page 4', link: 'en/page-4' }],
 	},
