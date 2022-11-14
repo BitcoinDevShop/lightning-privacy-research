@@ -1,6 +1,6 @@
 ---
 title: Routing Analysis
-description: Lorem ipsum dolor sit amet - 2
+description: An analysis into the privacy aspects of the routing layer on lightning.
 layout: ../../layouts/MainLayout.astro
 ---
 
