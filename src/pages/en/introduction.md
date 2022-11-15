@@ -6,7 +6,7 @@ layout: ../../layouts/MainLayout.astro
 
 Each bitcoin transaction is published on the public blockchain forever, and each transaction is composed of references to prior transactions [^1]. There are many well-established [best practices for using bitcoin privately](https://bitcoin.org/en/protect-your-privacy) but no silver bullets.
 
-As a layer two on top of bitcoin the lightning network can greatly help improve the privacy of bitcoin usage. Lightning has no central ledger or permanent record of all transactions — all transactions are conducted peer-to-peer — and transactions have no natural association with each other. But lightning is, also, not a silver bullet:
+As a layer two on top of bitcoin the lightning network can greatly help [improve the privacy](https://abytesjourney.com/lightning-privacy) of bitcoin usage. Lightning has no central ledger or permanent record of all transactions — all transactions are conducted peer-to-peer — and transactions have no natural association with each other. But lightning is, also, not a silver bullet:
 
 1. As a layer two, lightning is built on top of on-chain bitcoin transactions. If a lightning transaction can be easily associated with a bitcoin transaction it will then inherit the privacy of that bitcoin transaction.
 2. The world doesn't know about every lightning transaction, but the peer nodes involved in a transaction do know certain facts about it. If they choose to share this data with the world, or correlate it with other information themselves, they may be able to de-anonymize some transactions.
