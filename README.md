@@ -4,13 +4,13 @@ This is a work-in-progress documentation to specify the design of a light-weight
 
 Read the articles at [lightningprivacy.com](https://lightningprivacy.com).
 
-Read the [Current Stat of Lightning Network Privacy](https://abytesjourney.com/lightning-privacy/) by Tony Giorgio as a primer.
+Read the [Current State of Lightning Network Privacy](https://abytesjourney.com/lightning-privacy/) by Tony Giorgio as a primer.
 
 ## About the authors
 
 We are a group of cypherpunks, bitcoiners, and privacy enthusiast, researching and building the next generation of lightning network clients optimized to protect user privacy and security.
 
-[Ben the Carman](https://github.com/benthecarman), [Evan Kaloudis](https://github.com/kaloudis), [Max Hillebrand](https://github.com/maxhillebrand), [Paul Miller](https://github.com/futurepaul), [Tony Giorgio](https://github.com/TonyGiorgio)
+[benthecarman](https://github.com/benthecarman), [Evan Kaloudis](https://github.com/kaloudis), [Max Hillebrand](https://github.com/maxhillebrand), [Paul Miller](https://github.com/futurepaul), [Tony Giorgio](https://github.com/TonyGiorgio)
 
 ## Thanks to the sponsors
 
