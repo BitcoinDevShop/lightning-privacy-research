@@ -5,7 +5,6 @@ import PrivacyLogo from "./PrivacyLogo.astro";
 import SkipToContent from "./SkipToContent.astro";
 import SidebarToggle from "./SidebarToggle";
 import LanguageSelect from "./LanguageSelect";
-import Search from "./Search";
 
 type Props = {
   currentPage: string;
@@ -33,9 +32,9 @@ const lang = getLanguageFromURL(currentPage);
         <LanguageSelect lang={lang} client:idle />
       )
     }
-    <div class="search-item">
+    <!-- <div class="search-item">
       <Search client:idle />
-    </div>
+    </div> -->
   </nav>
 </header>
 

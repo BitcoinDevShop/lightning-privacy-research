@@ -28,23 +28,18 @@ export type Frontmatter = {
 export const KNOWN_LANGUAGES = {
 	English: 'en',
 } as const;
+
 export const KNOWN_LANGUAGE_CODES = Object.values(KNOWN_LANGUAGES);
 
-export const GITHUB_EDIT_URL = `https://github.com/withastro/astro/tree/main/examples/docs`;
+export const GITHUB_EDIT_URL = `https://github.com/BitcoinDevShop/lightning-privacy-research/tree/master`;
 
-export const COMMUNITY_INVITE_URL = `https://astro.build/chat`;
-
-// See "Algolia" section of the README for more information.
-export const ALGOLIA = {
-	indexName: 'XXXXXXXXXX',
-	appId: 'XXXXXXXXXX',
-	apiKey: 'XXXXXXXXXX',
-};
+export const COMMUNITY_INVITE_URL = `https://github.com/BitcoinDevShop/lightning-privacy-research`;
 
 export type Sidebar = Record<
 	typeof KNOWN_LANGUAGE_CODES[number],
 	Record<string, { text: string; link: string }[]>
 >;
+
 export const SIDEBAR: Sidebar = {
 	en: {
 		'The Book': [
