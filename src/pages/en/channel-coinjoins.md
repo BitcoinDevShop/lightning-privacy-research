@@ -115,7 +115,7 @@ deployed.
 
 ### Splicing Coinjoin
 
-Splicing is a new feature that is [being added]([Splicing BOLT](https://github.com/lightning/bolts/pull/863)) to the
+Splicing is a new feature that is [being added](https://github.com/lightning/bolts/pull/863) to the
 lightning protocol that allows you to update an active lightning channel. This means that you can add or remove funds
 from a channel without closing it. This is a very powerful feature because it allows you to have a channel that is
 always open and still be able to do on-chain transactions with the present balance. It also builds off of dual-funded
