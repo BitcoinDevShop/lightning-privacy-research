@@ -12,7 +12,7 @@ Blinded paths and trampoline routing are solutions for receivers to not explicit
 
 ## Blinded Paths
 
-Blinded paths are the spiritual successor to rendez-vous routing. In rendez-vous routing, the receiver chooses routes from select third-party nodes to himself and passes onion-encrypted blobs for those routes to the sender (typically, this will be passed in the payment request). The sender completes the route by finding routes from himself to the rendez-vous node, and tries to perform the payment over these routes. The receiver has to tell the sender how many hops he may add to a route - each hop adding more privacy for the receiver.
+Blinded paths are the spiritual successor to rendez-vous routing. In rendez-vous routing, the receiver chooses routes from select third-party nodes to himself and passes onion-encrypted blobs for those routes to the sender (typically, this will be passed in the payment request). The sender completes the route by finding routes from himself to the rendez-vous node (or introduction point), and tries to perform the payment over these routes. The receiver has to tell the sender how many hops he may add to a route - each hop adding more privacy for the receiver.
 
 Blinded paths (also referred to as blinded routes, or route blinding) is a similar technique that allows a recipient to provide a blinded route to potential senders. Each node public key in the route is tweaked, and dummy hops may be included.
 
