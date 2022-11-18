@@ -32,4 +32,8 @@ Node pubkeys
 
 Summary of 3 blog posts
 
+## Thanks to the sponsors
+
+This work was [graciously funded](https://blog.wasabiwallet.io/1-11-btc-ln-privacy-grant/) by [zkSNACKs](https://github.com/zksnacks), [Dan Gershony](https://github.com/dangershony), and the [Wasabi Wallet crew](https://wasabiwallet.io).
+
 [^1] Other than coinbase transactions received as mining rewards
