@@ -12,7 +12,7 @@ Blinded paths and trampoline routing are solutions for receivers to not explicit
 
 ## Blinded Paths
 
-Blinded paths are the spiritual successor to rendez-vous routing. In rendez-vous routing, the receiver chooses routes from select third-party nodes in the network to himself and passes onion-encrypted blobs for those routes to the sender (typically, this will be passed in the payment request). The sender completes the route by finding routes from himself to those nodes, and tries to perform the payment over these routes. The receiver has to tell the sender how many hops payer may add to a route - each hop adding more privacy for the receiver.
+Blinded paths are the spiritual successor to rendez-vous routing. In rendez-vous routing, the receiver chooses routes from select third-party nodes to himself and passes onion-encrypted blobs for those routes to the sender (typically, this will be passed in the payment request). The sender completes the route by finding routes from himself to the rendez-vous node (or introduction point), and tries to perform the payment over these routes. The receiver has to tell the sender how many hops he may add to a route - each hop adding more privacy for the receiver.
 
 Blinded paths (also referred to as blinded routes, or route blinding) is a similar technique that allows a recipient to provide a blinded route to potential senders. Each node public key in the route is tweaked, and dummy hops may be included.
 
@@ -26,7 +26,7 @@ For blinded paths to work, the following parties would need to upgrade their nod
 * Senders: they need to include blinding points and encrypted data into their onions
 * Forwarders: they need to be able to derive shared secret to decrypt forwarding data
 
-Thankfully, not everyone on lightning needs to update - just the parties involved in helping settle your transaction. But the more people that update to blinded paths the better, as receivers will have a bigger selection of nodes to include in their path.
+Thankfully, not everyone on lightning needs to update - just the parties involved in helping settle the transaction. But the more people that update to blinded paths the better, as receivers will have a bigger selection of nodes to include in their path.
 
 ## Trampoline Routing
 
