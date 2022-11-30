@@ -17,6 +17,8 @@ A lightning node must create on-chain bitcoin transactions to open and close cha
 lightning node's on-chain history and can harm the privacy of the node. This is especially true for routing nodes which
 announce their channels to the entire network.
 
+![Onchain tracking](/onchain-tracking.svg)
+
 What on-chain privacy techniques can we use to protect us from surveillance?
 
 ## A deep dive into channel coinjoins
@@ -76,6 +78,8 @@ We've talked about the downsides of coinjoining before opening a channel, but wh
 inside a coinjoin? This would allow us to have a single transaction that opens multiple channels that are all
 indistinguishable from each other on-chain. There are a few massive benefits to this.
 
+![Coinjoin stages](/coinjoin-stages.svg)
+
 The biggest benefit of this is that you are able to intermingled your on-chain history with the history of many other
 users. This means that when an observer tries to ascertain information about your lightning node's wallet history from
 your lightning channels, they will not be able to tell which inputs of the transaction are being used to fund which
@@ -122,6 +126,14 @@ always open and still be able to do on-chain transactions with the present balan
 lightning channels using the same interactive-tx protocol. This allows for peers to interactively construct bitcoin
 transactions together that will result in a splice of the peers channels.
 
+#### Regular splicing
+
+![Splice step 1](/splice-0.svg)
+
+![Splice step 2](/splice-1.svg)
+
+![Splice step 3](/splice-2.svg)
+
 Splicing can be done amongst any number of peers, you can initiate a splice with one peer, and then have another peer
 join in on the splice through either one of you. This can allow for splicing to become a coinjoin coordination mechanism
 where many peers can join in on a splice and all register utxos which they wish to mix. Because we are doing a splice
@@ -130,6 +142,12 @@ user received is not explicit on-chain, only the total channel amount. This mean
 coordinated on the lightning network, updating lightning channels, with unequal output amounts. This would require a lot
 of work to implement, but it is a very powerful feature that would have drastic implications for on-chain and lightning
 privacy.
+
+#### Coinjoin splicing
+
+![Coinjoin splice before](/splice-coinjoin-before.svg)
+
+![Coinjoin splice after](/splice-coinjoin-after.svg)
 
 Splicing could rework the way we think about coinjoin coordination, but what about the way we think about lightning
 channels? Previously, we had talked about that it is assumed that a once a lightning channel is opened it can no longer

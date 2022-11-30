@@ -16,15 +16,25 @@ Blinded paths are the spiritual successor to rendez-vous routing. In rendez-vous
 
 Blinded paths (also referred to as blinded routes, or route blinding) is a similar technique that allows a recipient to provide a blinded route to potential senders. Each node public key in the route is tweaked, and dummy hops may be included.
 
-<img width="1069" alt="Blinded Routes on the Lightning Network" src="https://user-images.githubusercontent.com/1878621/192857139-62276221-88d8-4982-bda2-ee570d4fa62a.png">
+#### How it usually be - Source routing, all constructed by sender
 
-Blinded paths are more flexible and simple than rendez-vous routing. With blinded paths, the public keys of the nodes in the route are just replaced with random public keys while letting senders choose what data they put in the onion for each hop. Rendez-vous senders cannot add data to the partial onion or reuse it.  This means that amounts must be fixed ahead of time in the partial onion which is conducive to multi-part payments. Blinded routes are also reusable when used with onion messaging.
+![Source routing](/blinded-routes-source.svg)
+
+#### How it could be - Blinded routing, tail constructed by receiver
+
+![Blinded routing](/blinded-routes-blinded.svg)
+
+#### Legend
+
+![Routing legend](/blinded-routes-legend.svg)
+
+Blinded paths are more flexible and simple than rendez-vous routing. With blinded paths, the public keys of the nodes in the route are just replaced with random public keys while letting senders choose what data they put in the onion for each hop. Rendez-vous senders cannot add data to the partial onion or reuse it. This means that amounts must be fixed ahead of time in the partial onion which is conducive to multi-part payments. Blinded routes are also reusable when used with onion messaging.
 
 For blinded paths to work, the following parties would need to upgrade their nodes:
 
-* Receivers: they needs to construct blinded node pubkeys and encrypted data
-* Senders: they need to include blinding points and encrypted data into their onions
-* Forwarders: they need to be able to derive shared secret to decrypt forwarding data
+- Receivers: they needs to construct blinded node pubkeys and encrypted data
+- Senders: they need to include blinding points and encrypted data into their onions
+- Forwarders: they need to be able to derive shared secret to decrypt forwarding data
 
 Thankfully, not everyone on lightning needs to update - just the parties involved in helping settle the transaction. But the more people that update to blinded paths the better, as receivers will have a bigger selection of nodes to include in their path.
 
@@ -85,7 +95,6 @@ Two attacks are spelled out in BOLT that important to acknowledge. Firstly, chan
 This is all exacerbated with the inclusion of BOLT12. With BOLT12 attackers don't even have to attempt the payment. They can simply request invoices from the recipient over time and detect when the recipient raises the fees or CLTV of the blinded route, and correlate them with recent channel updates. To mitigate this, it is important for users to add a large enough margin to the current values actually used by nodes inside the route to protect against future raises.
 
 A similar attack can be executed by waiting for nodes to go offline and attempting payment, instead of waiting for channel updates with value increases. To mitigate, receivers should choose hops with high uptime.
-
 
 ## Implementation status
 

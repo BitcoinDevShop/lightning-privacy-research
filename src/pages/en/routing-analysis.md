@@ -28,6 +28,16 @@ PTLCs offer two main improvements to Lightning. One is escrow / DLC / smart cont
 
 When a HTLC payment goes through multiple nodes, the same payment hash is used each time. So whenever the same actor sees the same payment hash on multiple nodes, they can tell that it is the same payment. They might not know who exactly it came from or where it is going (except in cases outlined above). If a Lightning service provider routes a user's payment to a major merchant, they might be able to conclude the exact source and destination.
 
+#### How it be
+
+![HTLCs routing diagram](/ptlc-how-it-be.svg)
+
+#### How it could be
+
+![PTLCs routing diagram](/ptlc-how-it-could-be.svg)
+
+The Suredbits blog has a [deeper exploration of how PTLCs work](https://suredbits.com/payment-points-part-1/).
+
 ### Timing Delay
 
 Timing delays are important so that it is not possible to estimate how far away a source or destination is from the observing node. Some early research shows that this is possible today. Some of the top nodes on the network are capable of analyzing the source and destination of [50 to 72% of payments](https://arxiv.org/pdf/2006.12143.pdf). Even estimating how far away a source/destination is may start to narrow down on the exact node based on the topology of the network. This is done by looking at the estimated paths that might have been taken and then doing the timing analysis to narrow them down.
@@ -43,6 +53,14 @@ This can be even further analyzed if Bob had another node named Bob-2 and it tur
 There are a few solutions to solving the timing analysis problem after PTLCs are in place. In ["Counting Down Thunder"](https://arxiv.org/pdf/2006.12143.pdf), they suggest that nodes add a random delay to the payment they are routing. For this delay to be meaningful, it should provide some amount of delay equal to about 2 to 3 times the average node delay. If it was only a few milliseconds while the average per-hop delay was 100ms, then that would not mean much. If each node is adding this level of random delay, then that is around 2 to 3 times the time it takes for payments to complete. Depending on how much time this adds, it could significantly hurt payment reliability for the entire Lightning network.
 
 Another aspect, as discussed by Peter Todd on the [Lightning-Dev Mailing list](https://lists.linuxfoundation.org/pipermail/lightning-dev/2022-June/003621.html), is based on having sender opt-in timing delays. The sender can ask each node along the hop to add a delay to the payment before they send it off to the next node. This allows the sender to have more fine grain control of their anonymity set of payments being routed. If a payment reaches a routing node and that node was asked to hold onto the payment for 10 seconds, meanwhile, 2 more payments of around the same amount size came in, then there's more ambiguity as to which payment was being routed where. Since the sender is asking for these delays, they are okay with how long they are asking for it to take. As long as the receiver gets the payment before the timeout specified in their invoice, they would be okay with some extra delay too.
+
+#### How it be
+
+![Timing analysis diagram](/timing-delay-how-it-be.svg)
+
+#### How it could be
+
+![Timing analysis diagram with delay](/timing-delay-how-it-could-be.svg)
 
 However, there are a few problems with sender opt-in timing delays. One is the fact that it may not be enforceable. If the sender asks a node today for a certain delay, but once received by the routing node, it decides to forward instantly anyways, nothing is stopping that from happening. The router can ignore this timing delay ask. One possible solution is to also alert the next node about this delay, and if that node is respecting the timing delay ask, they know the time stamp the previous node was asked to hold it till (without revealing how long in total) and may reject it if it was not respected. However, there are no incentives for upgrading the protocol in this way. Having HTLCs in flight for longer is a concern in general given the max per channel is currently 483. There could be some reasonable maximums set if we were able to have a consensus change but with all of this adds complexity and possibly more failures to routing. Is it worth the privacy cost? And how much timing delay would be needed assuming a certain amount of payment activity?
 
