@@ -1,6 +1,6 @@
 ---
-title: Introduction to Lightning Privacy
-description: Docs intro
+title: Lightning Privacy Introduction
+description: An introduction to Lightning privacy
 layout: ../../layouts/MainLayout.astro
 ---
 
