@@ -98,11 +98,11 @@ A similar attack can be executed by waiting for nodes to go offline and attempti
 
 ## Implementation status
 
-Core Lightning has had an undocumented and experimental implementation of blinded paths since 2020. See https://github.com/ElementsProject/lightning/pull/3623
+Core Lightning has had an undocumented and experimental implementation of blinded paths since 2020. See [here](https://github.com/ElementsProject/lightning/pull/3623).
 
-In late June 2022, the LND team opened a PR to their lightning-onion library: https://github.com/lightningnetwork/lightning-onion/pull/57. The PR is still under review. Once it's merged in we expect work should begin to add it to LND, but that should be a lighter lift than the integration in lightning-onion.
+In late June 2022, the LND team opened a PR to their lightning-onion library. [The PR](https://github.com/lightningnetwork/lightning-onion/pull/57) is still under review. Once it's merged in we expect work should begin to add it to LND, but that should be a lighter lift than the integration in lightning-onion.
 
-Work on blinded paths in Eclair has been underway for a while now, but is not yet available for users. See progress here: https://github.com/ACINQ/eclair/pulls?q=blinded. It appears implementation will be tied to BOLT12: https://github.com/ACINQ/eclair/pull/2021
+Work on blinded paths in Eclair has been underway for a while now, but is not yet available for users. See progress [here](https://github.com/ACINQ/eclair/pulls?q=blinded). It appears implementation will be tied to BOLT12, see [here](https://github.com/ACINQ/eclair/pull/2021).
 
 LDK also appears to be integrating blinded paths with BOLT12.
 
@@ -112,18 +112,14 @@ Eclair is currently the only implementation with support for trampoline routing.
 
 ### BOLTS
 
-Blinded Paths:
+[Route Blinding (Feature 24/25)](https://github.com/lightning/bolts/pull/765)
 
-https://github.com/lightning/bolts#765
+[Trampoline Routing (2021 edition) (Feature 56/57)](https://github.com/lightning/bolts/pull/829)
 
-Trampoline:
-
-https://github.com/lightning/bolts#829
-
-https://github.com/lightning/bolts#836
+[Trampoline onion format (Feature 56/57)](https://github.com/lightning/bolts/pull/836)
 
 ### Misc.
 
-Rendez-vous routing original proposal: https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-November/001498.html
+[Rendez-vous routing original proposal](https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-November/001498.html)
 
-How route blinding fits in with BOLT12 (Offers): https://github.com/lightningnetwork/lnd/issues/5594#issuecomment-1150822223
+[How route blinding fits in with BOLT12 (Offers)](https://github.com/lightningnetwork/lnd/issues/5594#issuecomment-1150822223)
