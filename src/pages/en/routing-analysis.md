@@ -147,5 +147,7 @@ This should be possible by all node implementations today at the application lay
 ## Links to further research
 
 [Suredbits PTLCs Introduction](https://suredbits.com/payment-points-part-1/)
+
 [MPP]([https://docs.lightning.engineering/lightning-network-tools/lnd/amp](https://docs.lightning.engineering/the-lightning-network/pathfinding/multipath-payments-mpp))/[AMP](https://docs.lightning.engineering/lightning-network-tools/lnd/amp)
+
 ["Counting Down Thunder" (Timing analysis)](https://arxiv.org/pdf/2006.12143.pdf)
