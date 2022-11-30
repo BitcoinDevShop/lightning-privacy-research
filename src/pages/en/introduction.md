@@ -42,6 +42,12 @@ In the [Blinded Paths + Trampoline Routing](/en/blinded-trampoline) chapter we t
 
 This research is open source at [lightning-privacy-research](https://github.com/BitcoinDevShop/lightning-privacy-research). Comments, suggestions, fixes, and additional ideas are all welcome.
 
+## About the authors
+
+We are a group of cypherpunks, bitcoiners, and privacy enthusiasts, researching and building the next generation of Lightning Network clients optimized to protect user privacy and security.
+
+[benthecarman](https://github.com/benthecarman), [Evan Kaloudis](https://github.com/kaloudis), [Max Hillebrand](https://github.com/maxhillebrand), [Paul Miller](https://github.com/futurepaul), [Tony Giorgio](https://github.com/TonyGiorgio)
+
 ## Thanks to the sponsors
 
 This work was [graciously funded](https://blog.wasabiwallet.io/1-11-btc-ln-privacy-grant/) by [zkSNACKs](https://github.com/zksnacks), [Dan Gershony](https://github.com/dangershony), and the [Wasabi Wallet crew](https://wasabiwallet.io).
