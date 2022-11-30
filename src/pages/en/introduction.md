@@ -48,6 +48,10 @@ We are a group of cypherpunks, bitcoiners, and privacy enthusiasts, researching 
 
 [benthecarman](https://github.com/benthecarman), [Evan Kaloudis](https://github.com/kaloudis), [Max Hillebrand](https://github.com/maxhillebrand), [Paul Miller](https://github.com/futurepaul), [Tony Giorgio](https://github.com/TonyGiorgio)
 
+## Acknowledgements
+
+Throughout this write up experience, we met with several Lightning experts to hear more about Lightning and privacy. These include [Rusty](https://mobile.twitter.com/rusty_twit), [t-bast](https://mobile.twitter.com/realtbast), and [Dusty](https://mobile.twitter.com/dusty_daemon).
+
 ## Thanks to the sponsors
 
 This work was [graciously funded](https://blog.wasabiwallet.io/1-11-btc-ln-privacy-grant/) by [zkSNACKs](https://github.com/zksnacks), [Dan Gershony](https://github.com/dangershony), and the [Wasabi Wallet crew](https://wasabiwallet.io).
