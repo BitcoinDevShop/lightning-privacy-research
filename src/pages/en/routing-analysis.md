@@ -130,7 +130,7 @@ The reason for many of the improvements discussed in this article is to increase
 
 The negatives and tradeoffs of the improvements above will decrease the user experience, increase the amount of failed payments, increase the network bugs and unilateral channel closures, increase the time it takes for a payment to be completed, and increase the fees that senders are required to pay. However, this should be part of the equation when network participants are using lightning today for users to make that conscious choice.
 
-## implementation status
+## Implementation Status
 
 ### PTLCs
 
@@ -146,9 +146,6 @@ This should be possible by all node implementations today at the application lay
 
 ## links to further research
 
-TODO
-
-- Timing analysis paper
-- Timing delay theories
-- PTLC (suredbits posts)
-- MPP/AMP
+- [Suredbits PTLCs Introduction](https://suredbits.com/payment-points-part-1/)
+- [MPP]([https://docs.lightning.engineering/lightning-network-tools/lnd/amp](https://docs.lightning.engineering/the-lightning-network/pathfinding/multipath-payments-mpp))/[AMP](https://docs.lightning.engineering/lightning-network-tools/lnd/amp)
+- ["Counting Down Thunder" (Timing analysis)](https://arxiv.org/pdf/2006.12143.pdf)
