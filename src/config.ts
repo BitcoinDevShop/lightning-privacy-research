@@ -1,17 +1,14 @@
 export const SITE = {
 	title: 'Lightning Privacy Research',
-	description: 'Your website description.',
+	description: 'Learn about potential improvements to Lightning to improve privacy',
 	defaultLanguage: 'en_US',
 };
 
 export const OPEN_GRAPH = {
 	image: {
-		src: 'https://github.com/withastro/astro/blob/main/assets/social/banner.jpg?raw=true',
-		alt:
-			'astro logo on a starry expanse of space,' +
-			' with a purple saturn-like planet floating in the right foreground',
+		src: 'https://lightningprivacy.com/social-banner.png',
+		alt: 'Lightning with PTLCs'
 	},
-	twitter: 'astrodotbuild',
 };
 
 // This is the type of the frontmatter you put in the docs markdown files.
@@ -48,6 +45,5 @@ export const SIDEBAR: Sidebar = {
 			{ text: 'Channel Coinjoins', link: 'en/channel-coinjoins' },
 			{ text: 'Blinded Paths + Trampoline Routing', link: 'en/blinded-trampoline' },
 		],
-		// 'Another Section': [{ text: 'Page 4', link: 'en/page-4' }],
 	},
 };
