@@ -41,7 +41,7 @@ creating a transaction that explicitly exits your funds from the coinjoin liquid
 no longer be a part of the growing coinjoin pool and can be treated as a normal utxo. This means that your utxo's
 anonymity set can only shrink as peers you coinjoined with do de-anonymizing actions on the blockchain.
 
-It gets more interesting when you're trying to open multiple channels at once. If are doing a batch channel open without
+It gets more interesting when you're trying to open multiple channels at once. If you are doing a batch channel open without
 a coinjoin it is very explict and one can easily make an assumption that all outputs in that transaction are channels
 that your node owns. Whereas if it is in a coinjoin there would be multiple channels going on, but it would be unknown
 which channels a node owns inside the transaction without being the channel owner.
